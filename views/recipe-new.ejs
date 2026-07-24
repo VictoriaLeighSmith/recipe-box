@@ -1,0 +1,22 @@
+<%- include('partials/header', { title: "Create Recipe" }) %>
+    <h1>Create New Recipe</h1>
+    <% if (typeof error !== 'undefined') { %>
+        <p class="error-message"><%= error %></p>
+    <% } %>
+    <form action="/recipes" method="POST">
+        <div class="form-input-container">
+            <label for="name">Recipe Name:</label>
+            <input type="text" name="name" id="name" required>
+        </div>
+        <div class="form-input-container">
+            <label for="ingredients">Ingredients:</label>
+            <textarea name="ingredients" id="ingredients" required></textarea>
+        </div>
+        <div class="form-input-container">
+            <label for="instructions">Instructions:</label>
+            <textarea name="instructions" id="instructions" required></textarea>
+        </div>
+        <button type="submit">Create Recipe</button>
+    </form>
+    <p><a href="/recipes">Back to My Recipes</a></p>
+<%- include('partials/footer') %>
