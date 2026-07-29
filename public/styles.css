@@ -1,142 +1,325 @@
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    background: linear-gradient(90deg, rgba(93,142,251,1) 0%, rgba(93,142,251,1) 50%, rgba(0,212,255,1) 100%);
-    height: 100%;
-    padding: 0px;
-    margin: 0px;
-    font-family: 'Lato', sans-serif;
-    display: flex;
-    color: #F6F6F6;
+  /* height: 100%;
+  padding: 0px;
+  margin: 0px; */
+  font-family: "Work Sans", sans-serif;
+  color: #2f2a26;
+
+  /* position: relative; */
+  overflow-x: hidden;
+  background: #f6f2e9;
 }
 
+/* ---------- STYLES FOR NAV ---------- */
+.navbar {
+  min-height: 80px;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 50px;
+  margin-bottom: 10px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #2f2a26;
+}
+
+.nav-logged-in,
+.nav-logged-out {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-links,
+.main-title,
+.user-actions {
+  flex: 1;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+.main-title {
+  display: flex;
+  justify-content: center;
+
+  font-family: "IM Fell English", serif;
+  font-style: italic;
+  color: #6f7d5c;
+  letter-spacing: 1px;
+  font-size: 30px;
+}
+
+.user-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+}
+
+/* ---------- STYLES FOR MAIN CONTENT ---------- */
 .main-content {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 24px;
+
+  min-height: 600px;
 }
 
-.main-content .error-message {
-    color: yellow;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 0px;
+/* .main-content .error-message {
+  color: yellow;
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: 0px;
+} */
+
+.main-content .create-recipe-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
 }
 
-.main-content h1 {
-    font-size: 50px;
-}
-
-.main-content ul {
-    margin: 0px;
-}
-
-.main-content ul :not(:first-child) {
-    padding-top: 10px;
-}
-
-.main-content li {
-    font-size: 20px;
-}
-
-.main-content a:link {
-    color: #F6F6F6;
-}
-
-.main-content a:visited {
-    color: #F6F6F6;
+.main-content a {
+  color: #2f2a26;
 }
 
 .main-content form {
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .main-content form .form-input-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .main-content form label {
-    padding-right: 5px;
+  padding-right: 10px;
+  margin-bottom: 6px;
 }
 
 .main-content form input,
 .main-content form textarea {
-    border-radius: 5px;
-    border: 0px;
-    font-size: 14px;
-    padding: 5px;
-    width: 250px;
+  border-radius: 5px;
+  border: 1px solid #8fa07a;
+  font-size: 14px;
+  padding: 5px;
+  width: 450px;
+}
+
+.main-content .form-input-card {
+  background-color: white;
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+
+  border-radius: 8px;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    0 12px 28px rgba(0, 0, 0, 0.06);
+}
+
+.main-content .form-input-card hr {
+  border: none;
+  height: 1px;
+  margin: 14px 0;
+  background-color: #8fa07a;
 }
 
 .main-content form textarea {
-    min-height: 80px;
-    resize: vertical;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.main-content .back-to-recipes {
+  margin-top: 20px;
+}
+
+.main-content .back-to-recipes a {
+  text-decoration: none;
 }
 
 .main-content button {
-    border: none;
-    background: #F6F6F6;
-    mix-blend-mode: screen;
-    padding: 6px;
-    border-radius: 5px;
-    margin-left: 5px;
-    cursor: pointer;
+  background: #8fa07a;
+  padding: 8px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+
+  border: 1px solid #6f7d5c;
+  align-self: flex-end;
+  font-family: "Work Sans", sans-serif;
+  font-style: italic;
+  color: #f6f2e9;
 }
 
 .main-content .index-button-container button {
-    font-size: 25px;
-    padding: 10px;
+  font-size: 25px;
+  padding: 10px;
 }
 
+/* ---------- STYLES FOR HOME ---------- */
+.home-page-info {
+  font-size: 30px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+/* ---------- STYLES FOR LOGIN/SIGNUP ---------- */
+.main-content .login-signup-title {
+  font-size: 24px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+/* ---------- STYLES FOR RECIPE LIST ---------- */
 .main-content .recipe-list {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-    max-width: 600px;
+  list-style: none;
+  padding: 0;
 }
 
-.main-content .recipe-list li {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.recipe-list {
+  list-style: none;
+  width: 100%;
+  max-width: 700px;
 }
 
-.main-content .recipe-list li a {
-    font-size: 18px;
-    text-decoration: none;
-    font-weight: bold;
+.recipe-list-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 12px;
 }
 
+.recipe-list-card {
+  background: white;
+  border: 1px solid #d8d2c6;
+
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.05),
+    0 8px 18px rgba(0, 0, 0, 0.04);
+}
+
+.recipe-card-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  width: 100%;
+  padding: 18px;
+  text-decoration: none;
+}
+
+/* ---------- STYLES FOR RECIPE DETAILS ---------- */
 .main-content .recipe-detail {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 600px;
-    width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 600px;
+  width: 100%;
 }
 
 .main-content .recipe-detail h2 {
-    margin-top: 0;
+  margin-top: 0;
 }
 
 .main-content .recipe-detail .section-title {
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .main-content .recipe-detail .meta {
-    font-size: 14px;
-    margin-top: 20px;
-    opacity: 0.8;
+  font-size: 14px;
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+/* ---------- STYLES FOR FIXED FLOWER IMAGES IN BACKGROUND ---------- */
+.flowers {
+  position: fixed;
+  width: clamp(110px, 18vw, 280px);
+  height: auto;
+  opacity: 0.72;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+}
+
+.flowers-top-left {
+  width: clamp(105px, 14vw, 235px);
+  top: 160px;
+  left: 90px;
+  transform: rotate(-5deg);
+}
+
+.flowers-bottom-right {
+  width: clamp(130px, 17vw, 270px);
+  bottom: 8px;
+  right: 40px;
+  transform: rotate(10deg);
+}
+
+/* ---------- MEDIA QUERIES ---------- */
+@media (max-width: 760px) {
+  .flowers {
+    max-height: 28vh;
+    opacity: 0.5;
+  }
+
+  .flowers-top-left {
+    display: none;
+  }
+}
+
+@media (max-height: 850px) {
+  .flowers {
+    width: clamp(90px, 15vw, 220px);
+  }
+}
+
+/* Probably will need to change this it looks like crap */
+@media (max-width: 960px) {
+  .nav-logged-in,
+  .nav-logged-out {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .main-title {
+    order: -1;
+  }
+
+  .nav-links,
+  .user-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .navbar {
+    padding: 16px 20px;
+  }
 }

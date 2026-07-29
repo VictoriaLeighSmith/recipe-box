@@ -22,14 +22,26 @@
       </div>
 
       <div class="user-actions">
-        <a href="/logout">Logout</a> <!-- MAKE THIS A BUTTON? -->
+        <a href="/logout">Logout</a>
       </div>
     </div>
     <% } else { %>
     <div class="nav-logged-out">
-      <a href="/">HOME</a>
-      <a href="/login">LOGIN</a>
-      <a href="/signup">SIGNUP</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+      </div>
+
+      <div class="main-title">
+        <h1>RECIPE BOX</h1>
+      </div>
+
+      <div class="user-actions">
+        <a href="/login">Login</a>
+        <a href="/signup">Signup</a>
+      </div>
     </div>
     <% } %>
   </nav>
+
+  <img class="flowers flowers-top-left" src="/images/flowers-top-left.png" alt="" aria-hidden="true">
+  <img class="flowers flowers-bottom-right" src="/images/flowers-bottom-right.png" alt="" aria-hidden="true">
