@@ -41,8 +41,10 @@ const RECIPES = [];
 
 // ---------- GET /login - Render login form ----------
 app.get("/login", (request, response) => {
+  const currentUser = request.session.user;
   const errorMessage = request.query.error || null;
-  return response.render("login", { errorMessage });
+
+  return response.render("login", { errorMessage, currentUser });
 });
 
 // ---------- POST /login - Allows a user to login ----------
@@ -66,31 +68,36 @@ app.post("/login", (request, response) => {
 
 // ---------- GET /signup - Render signup form ----------
 app.get("/signup", (request, response) => {
-  return response.render("signup", { errorMessage: null });
+  const currentUser = request.session.user;
+
+  return response.render("signup", { errorMessage: null, currentUser });
 });
 
 // ---------- POST /signup - Allows a user to signup ----------
 app.post("/signup", (request, response) => {
+  const currentUser = request.session.user;
   const { username, email, password } = request.body;
   const normalizedUsername = username.trim();
   const normalizedEmail = email.trim().toLowerCase();
 
   // Validate normalized data and pass appropriate error messages
   if (USERS.find((user) => user.username === normalizedUsername)) {
-    return response
-      .status(400)
-      .render("signup", { errorMessage: "Username is already in use" });
+    return response.status(400).render("signup", {
+      errorMessage: "Username is already in use",
+      currentUser,
+    });
   }
 
   if (USERS.find((user) => user.email === normalizedEmail)) {
     return response
       .status(400)
-      .render("signup", { errorMessage: "Email already in use" });
+      .render("signup", { errorMessage: "Email already in use", currentUser });
   }
 
   if (!password || password.length < 8) {
     return response.status(400).render("signup", {
       errorMessage: "Password must be at least 8 characters long",
+      currentUser,
     });
   }
 
@@ -111,22 +118,27 @@ app.post("/signup", (request, response) => {
 
 // ---------- GET / - Render home page (or redirect to /recipes if logged in) ----------
 app.get("/", (request, response) => {
-  if (request.session.user) {
+  const currentUser = request.session.user;
+
+  if (currentUser) {
     return response.redirect("/recipes");
   }
 
-  return response.render("index");
+  return response.render("index", { currentUser, errorMessage: null });
 });
 
 // ---------- GET /recipes - Show all recipes for the logged-in user (all recipes for admin) ----------
 app.get("/recipes", (request, response) => {
-  if (!request.session.user) {
+  const errorMessage = request.query.error || null;
+  const currentUser = request.session.user;
+
+  if (!currentUser) {
     return response.redirect(
       "/login?error=You must be logged in to view this page",
     );
   }
 
-  const { id, role } = request.session.user;
+  const { id, role } = currentUser;
   let recipesToDisplay;
 
   // Display all recipes for users with admin privileges, otherwise filter recipes by userId
@@ -145,34 +157,36 @@ app.get("/recipes", (request, response) => {
     };
   });
 
-  const errorMessage = request.query.error || null;
-
   return response.render("recipes", {
     recipes,
-    currentUser: request.session.user,
+    currentUser,
     errorMessage,
   });
 });
 
 // ---------- GET /recipes/new - Render create recipe form ----------
 app.get("/recipes/new", (request, response) => {
-  if (!request.session.user) {
+  const currentUser = request.session.user;
+
+  if (!currentUser) {
     return response.redirect(
       "/login?error=You must be logged in to create a new recipe",
     );
   }
 
-  return response.render("recipe-new", { errorMessage: null });
+  return response.render("recipe-new", { errorMessage: null, currentUser });
 });
 
 // ---------- POST /recipes - Create a new recipe ----------
 app.post("/recipes", (request, response) => {
-  if (!request.session.user) {
+  const currentUser = request.session.user;
+
+  if (!currentUser) {
     return response.redirect("/login");
   }
 
   const { name, ingredients, instructions } = request.body;
-  const { id } = request.session.user;
+  const { id } = currentUser;
 
   // Normalize the data before validating
   const normalizedName = name?.trim();
@@ -182,6 +196,7 @@ app.post("/recipes", (request, response) => {
   if (!normalizedName || !normalizedIngredients || !normalizedInstructions) {
     return response.status(400).render("recipe-new", {
       errorMessage: "Recipe must contain name, ingredients, and instructions",
+      currentUser,
     });
   }
 
@@ -201,13 +216,15 @@ app.post("/recipes", (request, response) => {
 
 // ---------- GET /recipes/:id - Show a single recipe's details ----------
 app.get("/recipes/:id", (request, response) => {
-  if (!request.session.user) {
+  const currentUser = request.session.user;
+
+  if (!currentUser) {
     return response.redirect("/login");
   }
 
   const recipeId = parseInt(request.params.id);
   const recipe = RECIPES.find((recipe) => recipe.id === recipeId);
-  const { role, id } = request.session.user;
+  const { role, id } = currentUser;
 
   if (!recipe) {
     return response.redirect("/recipes?error=Recipe not found");
@@ -219,18 +236,34 @@ app.get("/recipes/:id", (request, response) => {
     );
   }
 
-  return response.render("recipe-detail", { recipe });
+  const creator = USERS.find((user) => user.id === recipe.userId);
+
+  const recipeWithCreator = {
+    ...recipe,
+    creatorUsername: creator ? creator.username : "Unknown",
+  };
+
+  const canDelete = recipe.userId === id || role === "admin";
+
+  return response.render("recipe-detail", {
+    recipe: recipeWithCreator,
+    canDelete,
+    currentUser,
+    errorMessage: null,
+  });
 });
 
 // ---------- POST /recipes/:id/delete - Delete a recipe ----------
 app.post("/recipes/:id/delete", (request, response) => {
-  if (!request.session.user) {
+  const currentUser = request.session.user;
+
+  if (!currentUser) {
     return response.redirect("/login");
   }
 
   const recipeId = parseInt(request.params.id);
   const recipe = RECIPES.find((recipe) => recipe.id === recipeId);
-  const { role, id } = request.session.user;
+  const { role, id } = currentUser;
 
   if (!recipe) {
     return response.redirect("/recipes?error=Recipe not found");

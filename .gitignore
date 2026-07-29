@@ -14,8 +14,11 @@ dist/
 build/
 
 # OS specific files
-.DS_Store          # macOS
-Thumbs.db         # Windows
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db         
 
 # IDE specific files
 .vscode/
