@@ -1,0 +1,35 @@
+<%- include("partials/header", { title: "Recipes" }) %>
+
+<main class="main-content">
+  <% if (currentUser.role === "admin") { %>
+  <h1>Recipes</h1>
+  <% } else { %>
+  <h1>
+    <%= currentUser.username %>'s Recipes
+  </h1>
+  <% } %>
+
+  <% if (recipes.length === 0) { %>
+  <p>No recipes found.</p>
+  <% } else { %>
+  <ul class="recipe-list">
+    <% recipes.forEach((recipe) => { %>
+    <a href="/recipes/<%= recipe.id %>">
+      <li>
+        <h2>
+          <%= recipe.name %>
+        </h2>
+
+        <% if (currentUser.role === "admin") { %>
+        <p>Created by: <%= recipe.creatorUsername %></p>
+        <% } %>
+      </li>
+    </a>
+    <% }); %>
+  </ul>
+  <% } %>
+
+  <p><a href="/recipes/new">Create New Recipe</a></p>
+</main>
+
+<%- include("partials/footer") %>
