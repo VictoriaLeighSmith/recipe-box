@@ -3,8 +3,8 @@
 <main class="main-content">
   <h1>Sign Up</h1>
 
-  <% if (typeof error !== 'undefined') { %>
-  <p class="error-message"><%= error %></p>
+  <% if (typeof errorMessage !== 'undefined') { %>
+  <p class="error-message"><%= errorMessage %></p>
   <% } %>
 
   <form action="/signup" method="POST">

@@ -13,12 +13,14 @@
     <% if (currentUser) { %>
     <div class="nav-logged-in">
       <div class="nav-links">
-        <a href="/recipes">Recipes</a>
-        <a href="/recipes/new">Add New Recipe</a>
+        <a href="/recipes"> My Recipes</a>
+        <a href="/recipes/new">Add Recipe</a>
       </div>
 
       <div class="main-title">
-        <h1>RECIPE BOX</h1>
+        <a href="/">
+          <h1>RECIPE BOX</h1>
+        </a>
       </div>
 
       <div class="user-actions">
@@ -28,16 +30,17 @@
     <% } else { %>
     <div class="nav-logged-out">
       <div class="nav-links">
-        <a href="/">Home</a>
       </div>
 
       <div class="main-title">
-        <h1>RECIPE BOX</h1>
+        <a href="/">
+          <h1>RECIPE BOX</h1>
+        </a>
       </div>
 
       <div class="user-actions">
         <a href="/login">Login</a>
-        <a href="/signup">Signup</a>
+        <!-- <a href="/signup">Signup</a> -->
       </div>
     </div>
     <% } %>
