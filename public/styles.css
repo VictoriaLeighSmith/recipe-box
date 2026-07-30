@@ -54,7 +54,7 @@ body {
   gap: 30px;
 }
 
-.main-title {
+.main-title a {
   display: flex;
   justify-content: center;
 
@@ -83,12 +83,14 @@ body {
   min-height: 600px;
 }
 
-/* .main-content .error-message {
-  color: yellow;
+.main-content .error-message {
+  background-color: #c5b357;
   font-weight: bold;
   font-size: 16px;
-  margin-top: 0px;
-} */
+  margin: 16px 0;
+  padding: 10px;
+  border-radius: 8px;
+}
 
 .main-content .create-recipe-title {
   font-size: 24px;
