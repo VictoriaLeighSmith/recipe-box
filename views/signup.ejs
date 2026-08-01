@@ -1,32 +1,39 @@
 <%- include('partials/header', { title: "Sign Up" }) %>
 
 <main class="main-content">
-  <h1>Sign Up</h1>
+  <div class="login-signup-container">
+    <h2 class="login-signup-title">Create Account</h2>
 
-  <% if (typeof errorMessage !== 'undefined') { %>
-  <p class="error-message"><%= errorMessage %></p>
-  <% } %>
+    <% if (typeof errorMessage !== 'undefined') { %>
+    <p class="error-message"><%= errorMessage %></p>
+    <% } %>
 
-  <form action="/signup" method="POST">
-    <div class="form-input-container">
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email" required>
+    <div>
+      <form action="/signup" method="POST">
+        <div class="form-input-container">
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+
+        <div class="form-input-container">
+          <label for="username">Username:</label>
+          <input type="text" name="username" id="username" required>
+        </div>
+
+        <div class="form-input-container">
+          <label for="password">Password:</label>
+          <input type="password" name="password" id="password" required>
+        </div>
+
+        <button class="login-signup-button" type="submit">Sign Up</button>
+      </form>
     </div>
 
-    <div class="form-input-container">
-      <label for="username">Username:</label>
-      <input type="text" name="username" id="username" required>
-    </div>
-
-    <div class="form-input-container">
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" required>
-    </div>
-
-    <button type="submit">Sign Up</button>
-  </form>
-
-  <p><a href="/">Go back</a></p>
+    <p class="go-back"><a href="/"><svg width="12px" height="12px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>Back
+      </a></p>
+  </div>
 </main>
 
 <%- include('partials/footer') %>

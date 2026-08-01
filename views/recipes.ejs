@@ -1,24 +1,55 @@
 <%- include("partials/header", { title: "Recipes" }) %>
 
 <main class="main-content">
-  <% if (currentUser.role === "admin") { %>
-  <h2 class="recipe-list-title">Recipes</h2>
-  <% } else { %>
-  <h2 class="recipe-list-title">
-    <%= currentUser.username %>'s Recipes
-  </h2>
+  <% if (typeof errorMessage !== "undefined" && errorMessage) { %>
+  <p class="error-message"><%= errorMessage %></p>
   <% } %>
 
   <% if (recipes.length === 0) { %>
-  <p>No recipes found.</p>
+
+  <div class="recipe-list-header-empty">
+    <h2 class="recipe-list-title">
+      <% if (currentUser.role === "admin") { %>
+      Recipes
+      <% } else { %>
+      <%= currentUser.username %>'s Recipes
+      <% } %>
+    </h2>
+
+    <p class="empty-recipe-list">
+      No recipes found.
+    </p>
+
+    <a href="/recipes/new" class="create-recipe-link">
+      Add Recipe
+    </a>
+  </div>
+
   <% } else { %>
+
+  <div class="recipe-list-header">
+    <div class="recipe-header-space"></div>
+
+    <h2 class="recipe-list-title">
+      <% if (currentUser.role === "admin") { %>
+      Recipes
+      <% } else { %>
+      <%= currentUser.username %>'s Recipes
+      <% } %>
+    </h2>
+
+    <div class="create-recipe">
+      <a href="/recipes/new" class="create-recipe-link">
+        Add Recipe
+      </a>
+    </div>
+  </div>
+
   <ul class="recipe-list">
     <% recipes.forEach((recipe) => { %>
     <li class="recipe-list-card">
       <a class="recipe-card-link" href="/recipes/<%= recipe.id %>">
-        <h3>
-          <%= recipe.name %>
-        </h3>
+        <h3><%= recipe.name %></h3>
 
         <% if (currentUser.role === "admin") { %>
         <p>Created by: <%= recipe.creatorUsername %></p>
@@ -27,9 +58,8 @@
     </li>
     <% }); %>
   </ul>
-  <% } %>
 
-  <p><a href="/recipes/new">Create New Recipe</a></p>
+  <% } %>
 </main>
 
 <%- include("partials/footer") %>

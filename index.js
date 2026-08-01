@@ -38,6 +38,7 @@ const USERS = [
 ];
 
 const RECIPES = [];
+let nextRecipeId = 1;
 
 // ---------- GET /login - Render login form ----------
 app.get("/login", (request, response) => {
@@ -270,7 +271,7 @@ app.post("/recipes", (request, response) => {
 
   // After validating, create a new recipe and push to the RECIPES array
   const newRecipe = {
-    id: RECIPES.length + 1,
+    id: nextRecipeId++,
     name: name.trim(),
     ingredients: ingredients.trim(),
     instructions: instructions.trim(),
