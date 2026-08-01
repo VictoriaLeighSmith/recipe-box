@@ -1,17 +1,22 @@
 <%- include('partials/header', { title: "Recipe Box", currentUser }) %>
 
 <main class="main-content">
-  <% if (currentUser) { %>
-  <p>Welcome, <%= currentUser.username %>!</p>
+  <div class="welcome-container">
+    <% if (currentUser) { %>
+    <h2 class="welcome-logged-in">Welcome, <%= currentUser.username %>!</h2>
 
-  <a href="/recipes">Go To Recipes</a>
-  <% } else { %>
-  <p class="home-page-info">Store and manage your favorite recipes!</p>
+    <span class="welcome-logged-in-button">
+      <button onclick="window.location.href='/recipes'">Go To Recipes</button>
+    </span>
+    <% } else { %>
+    <h2 class="welcome-logged-out">Your favorite recipes, all in one place.</h2>
+    <p class="welcome-info">Save family classics, weeknight staples, and new discoveries in your own personal recipe collection.</p>
 
-  <span class="index-button-container">
-    <button onclick="window.location.href='/signup'">Sign Up</button>
-  </span>
-  <% } %>
+    <span class="index-button-container">
+      <button onclick="window.location.href='/signup'">Sign Up</button>
+    </span>
+    <% } %>
+  </div>
 </main>
 
 <%- include('partials/footer') %>
